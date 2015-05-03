@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	
+	<title>Dashboard</title>
+	<meta name="author" content="Alvaro Trigo Lopez" />
+	<meta name="description" content="fullPage very simple demo." />
+	<meta name="keywords"  content="fullpage,jquery,demo,simple" />
+	<meta name="Resource-type" content="Document" />
+
+	<link rel="stylesheet" type="text/css" href="/static/css/index.css" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>	
+	
+
+</head>
+<body>
+	<h1 align="center">Dashboard</h1>
+	<div class="fields">
+		<form method="POST" action="{{ url_for('admin') }}" enctype=multipart/form-data>
+			<input type="text" name="title" placeholder="title"></input><br />
+			<input type="text" name="description" placeholder="description"></input><br />
+			<input type="text" name="button_list_title" placeholder="button_list_title"></input><br />
+			<input type="text" name="button_list_url" placeholder="button_list_url"></input><br />
+			<input type="text" name="tags" placeholder="tags"></input><br />
+		<!-- ********************************************************************************* -->
+			<div class="files">
+			<p>upload Images</p>
+			<input type="file" name="file"></input>
+			<input type="submit" value="Upload">
+			<!--
+			<p>thumbnail_2</p>
+			<input type="file"></input>
+			<p>large_1</p>
+			<input type="file"></input>
+			<p>large_2</p>
+			<input type="file"></input>
+			-->
+			<br />
+			</div>
+			<button type="submit" value="submit">Submit</button><br />	
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,93 @@
+from flask import render_template, flash, redirect, session, url_for, request, g, abort
+from flask.ext.login import login_user, logout_user, current_user, login_required
+from flask.ext.admin import helpers, expose
+#from app import app, db, lm, oid
+from app import app, db, lm
+from forms import LoginForm, CommentForm
+from models import User, Image, Comment
+from twilio.rest import TwilioRestClient
+
+
+# Find these values at https://twilio.com/user/account
+account_sid = "AC18d08fbe124a82b91b3d5c16050bde97"
+auth_token = "2b0f2c2a29c1337db6952a5fe1a2c43b"
+client = TwilioRestClient(account_sid, auth_token)
+
+@app.before_request
+def before_request():
+	g.user = current_user
+
+
+@app.route('/')
+def index():
+        return render_template('landing.html')
+		
+		
+@app.route('/message_sent', methods=['POST'])
+def message_sent():
+	message = request.args.get('message')
+	#text_message = client.messages.create(to="+17676144347", from_="+12057915604", body="Please place this on Hold...")
+	flash('Message sent to Supplier!')
+	return redirect(url_for('show_entries'))
+	
+	
+@app.route('/liked', methods=['POST'])
+def liked():
+	Social.like += 1
+	if request.method == 'POST':
+		db.session.add(Social.like)
+		db.session.commit()
+		flash('Thanks for the admiration!')
+	return redirect(url_for('show_entries'))
+	
+
+@app.route('/add', methods=['POST'])
+def add():
+	#form = request.form['comments']
+	form = CommentForm()
+	comment = Comment(body=form.body.data, author=current_user._get_current_object())
+	db.session.add(comment)
+	flash('New entry was successfully posted')
+	return redirect(url_for('show_entries'))
+		
+
+@app.route('/show_entries')
+def show_entries():
+	post = Image.query.all()
+	social = Comment.query.all()
+	#social = Social.query.order_by(Social.like, Social.comments).first()
+	return render_template('show_entries.html', 
+	post=post, 
+	social=social)
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+	form = LoginForm(request.form)
+	if helpers.validate_form_on_submit(form):
+		user = User.query.filter_by(username=form.username.data, password=form.password.data).first()
+		if user is not None:
+			login_user(user)
+			session['logged_in'] = True
+			flash('You are now logged in')
+			return redirect(url_for('show_entries'))
+	return render_template('login.html', form=form)
+
+
+@app.route('/admin')
+#@login_required
+def admin():
+    return '<a href="/admin/">Click me to get to Admin!</a>'
+	
+	
+@app.route('/logout')
+def logout():
+	logout_user()
+	flash('You were logged out')
+	return redirect(url_for('show_entries'))
+
+#_________________ NEW  _______________________
+@lm.user_loader
+def load_user(id):
+    return User.query.get(int(id))
+#_________________ NEW  _______________________

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	
+	<title>Aulavara | Design & Development</title>
+	<meta name="author" content="Alvaro Trigo Lopez" />
+	<meta name="description" content="fullPage very simple demo." />
+	<meta name="keywords"  content="fullpage,jquery,demo,simple" />
+	<meta name="Resource-type" content="Document" />
+
+	
+	<link rel="stylesheet" type="text/css" href="/static/css/jquery.fullPage.css" />
+	<link rel="stylesheet" type="text/css" href="/static/css/examples.css" />
+	<link rel="stylesheet" type="text/css" href="/static/css/index.css" />
+	<link rel="stylesheet" type="text/css" href="/static/css/elastic_framework.css" />
+	<link rel="stylesheet" type="text/css" href="/static/css/elastic_grid.min.css" />
+
+
+	<!--[if IE]>
+		<script type="text/javascript">
+			 var console = { log: function() {} };
+		</script>
+	<![endif]-->
+		
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>	
+	
+	<script type="text/javascript" src="/static/js/jquery.fullPage.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#fullpage').fullpage({
+				slidesColor: ['#f2f2f2', '#ffffff']
+			});
+		});
+	</script>
+
+</head>
+<body>
+
+
+<div id="fullpage">
+	<div class="header">
+		<img src="static/img/logo.png" width="5%" height="5%" />
+		<h3>Aulavara // Design & Development</h3>
+		<!-- <button type="button" onclick="window.location='login'">ENTER SITE</button> -->
+	</div>
+	
+	<div class="section active" id="section0">
+		<div class="wrapper">
+			<div class="navbar">
+					<ul>
+					<li><a href="#">Home</a></li>
+					<li><a href="https://aulavara.wordpress.com/">Blog</a></li>
+					<li><a href="">About</a></li>
+					<li><a href="">Book shelf</a></li>
+					</ul>
+			</div>
+		
+			<div id="elastic_grid_demo" style="display:block;position:relative;top:10%;"></div>	
+				<SCRIPT SRC="/static/js/modernizr.custom.js"></SCRIPT>
+				<SCRIPT SRC="/static/js/classie.js"></SCRIPT>
+				<SCRIPT SRC="/static/js/elastic_grid.encode.js" TYPE="text/javascript"></SCRIPT>
+			</div>
+	</div>
+	
+	<div class="section" id="section1">
+		<div class="footer"></div>
+	</div>
+
+</div>
+
+<SCRIPT TYPE="text/javascript">
+$(function() {
+	$("#elastic_grid_demo").elastic_grid({
+	    'items': [{
+      'title': 'Web Developement | Optiprecision',
+      'description': 'This project was done for [ optiprecision.com ] and built from a Design I proposed. Everything was built from stratch to suit their particular needs.',
+      'thumbnail': ['/static/img/small/1.png', '/static/img/small/1.png'],
+      'large': ['/static/img/large/1.png', '/static/img/large/1.png'],
+      'button_list': [{
+        'title': 'Link',
+        'url': 'http://optiprecision.com'
+      }],
+      'tags': ['Web Developement']
+    }, {
+      'title': 'Web Developement | Motigam',
+      'description': 'Website created for the Rotaract Club of Roseau"s Professional Committee - 2013',
+      'thumbnail': ['/static/img/small/2.png', '/static/img/small/2.png'],
+      'large': ['', ''],
+      'button_list': [{
+        'title': 'Link',
+        'url': 'www.motigam.site44.com'
+      }],
+      'tags': ['Web Developement']
+    }, {
+      'title': 'Mobile Development and Design | Bagit',
+      'description': 'Bagit was partly developed for the DigialJam 3.0 competition in Jamaica of 2014.',
+      'thumbnail': ['/static/img/small/3.png', '/static/img/small/3.png'],
+      'large': ['/static/img/large/3.png', '/static/img/large/3.png'],
+      'button_list': [{
+        'title': 'Link',
+        'url': 'http://bonchen.net/'
+      }], 
+      'tags': ['Mobile Development','Design']
+    }, 
+		{% for item in post  %}
+	{
+      'title': '{{ item.title }}',
+      'description': '{{ item.description }}',
+      'thumbnail': ['{{ item.file }}', ''],
+      'large': ['', ''],
+      'button_list': [{
+        'title': '{{ item.button_list_title }}',
+        'url': '{{ item.button_list_url }}'
+      }], 
+      'tags': ['{{ item.tags }}']
+    }//{{ commar }}
+		{% endfor %}
+	]
+	});
+});
+</SCRIPT>
+
+</body>
+</html>

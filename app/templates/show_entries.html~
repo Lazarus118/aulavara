@@ -1,0 +1,33 @@
+{% extends "views/index.html" %}
+{% block body %}
+  {% if session.logged_in %}
+   
+   <div class=entries>
+  {% for entry in entries %}
+   <div class="slide">
+   <div align="center" class="entries-img">
+    <img src="{{ entry.photo_filename }}" >
+   </div>
+   <div class="entries-desc">
+   <h4 align="left">{{ entry.photo_description }}</h4>
+   </div>
+	<!-- <div class="entries-more"></div>-->
+    <div class="social">
+
+	<button type="submit" value="clicked"><img src="/static/img/likes.png" width="32px" height="32px" /></button><span>{{ like }}<span> <p>likes</p>
+	
+	<form method="POST" action="">
+	<label>Comment :<textarea name="comment" rows="1" cols="100"></textarea> 
+	</form>
+    </div>
+   </div><!-- /slide -->
+   <br />
+  {% else %}
+    <p><em>Unbelievable.  No entries here so far</p>
+  {% endfor %}
+  </div><!-- /entries -->
+   
+
+
+  {% endif %}
+{% endblock %}

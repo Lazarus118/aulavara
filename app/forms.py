@@ -12,4 +12,5 @@ class adminForm(form.Form):
 	button_list_url = fields.TextField('button_list_url')
 	tags = fields.TextField('tags')
 	file = fields.FileField('file')
+	file2 = fields.FileField('file2')
 	

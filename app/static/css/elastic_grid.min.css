@@ -42,8 +42,8 @@
   outline: 0;
   display: block;
   position: relative;
-  max-height: 250px;
-  max-width: 250px;
+  max-height: 200px;
+  max-width: 200px;
 }
 
 .og-pointer {
@@ -70,6 +70,7 @@
   margin-top: 0;
   text-align: left;
   height: 0;
+  z-index: 1000;
   overflow: hidden;
 }
 
@@ -280,7 +281,7 @@
 }
 
 .wagwep-container ul#portfolio-filter a {
-	color: #fff;
+	color: #BFBFBF;
 	text-decoration: none;
 	font-size: 10px;
 	font-weight: bold;
@@ -295,11 +296,11 @@
 .wagwep-container ul#portfolio-filter li.current a,ul#portfolio-filter a:hover {
   text-decoration: none;
   background: #eee;
-  color: #BFBFBF;
+  color: #fff;
 }
 
 .wagwep-container ul#portfolio-filter li.current a {
-  color: #333;
+  color: #BFBFBF;
   font-weight: bold;
   background: #1BA39C;
   color: #fff;

@@ -17,7 +17,18 @@ def index():
 	post = Projects.query.all()
 	commar = ','
 	return render_template('index.html', post=post, commar=commar)
-	
+
+@app.route('/about')
+def about():
+		return render_template('about.html')
+
+@app.route('/more')
+def more():
+		return render_template('more.html')	
+
+@app.route('/inmail')
+def inmail():
+			return render_template('inmail.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -40,53 +51,51 @@ def logout():
 	return redirect(url_for('show_entries'))
 	
 	
-ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
-		   
-
 #***********************************************************************#
 # // ADMIN //
+#***********************************************************************#	
+UPLOAD_FOLDER = '/home/lazarus/Programming/Flask_apps/aulavara/app/static/img/small/'
+UPLOAD_FOLDER2 = '/home/lazarus/Programming/Flask_apps/aulavara/app/static/img/large/'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['UPLOAD_FOLDER2'] = UPLOAD_FOLDER2
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+	
+def allowed_file(filename):
+	return '.' in filename and \
+           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+
 #***********************************************************************#
+
 @app.route('/admin/', methods=['GET', 'POST'])
 def admin():
-	
-	#******************************************************************************#
-	# //Concerned with uploading files
-	#******************************************************************************#
-	UPLOAD_FOLDER = ['/home/lazarus/Programming/Flask_apps/aulavara/app/static/img/']
-	app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
+	form = adminForm(request.form)
 	if request.method == 'POST':
-		form = Projects(request.form['title'], 
-						request.form['description'],
-						request.form['button_list_title'],
-						request.form['button_list_url'],
-						request.form['tags'],
-						request.files['file'])
-		
-		#***************************************************************#
 		
 		file = request.files['file']
 		if file and allowed_file(file.filename):
 			filename = secure_filename(file.filename)
-			file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
-			return redirect(url_for('admin'))
+			file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+		
+		file2 = request.files['file2']
+		if file2 and allowed_file(file2.filename):
+			filename = secure_filename(file2.filename)
+			file2.save(os.path.join(app.config['UPLOAD_FOLDER2'], filename))	
 			
-			
+		path = '/static/img/small/'
+		path2 = '/static/img/large/'
+		form = Projects(request.form['title'],
+						request.form['description'],
+						request.form['button_list_title'],
+						request.form['button_list_url'],
+						request.form['tags'],
+						path + filename,
+						path2 + filename)
 		db.session.add(form)
 		db.session.commit()
+		return redirect(url_for('admin'))
 			
 		
 	return render_template('admin.html')
-
-		   
-'''		   
-@app.route('/uploads/<filename>')
-def uploaded_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'],filename)
-'''		   
 
 
 #***********************************************************************#

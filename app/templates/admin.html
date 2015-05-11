@@ -16,28 +16,21 @@
 
 </head>
 <body>
-	<h1 align="center">Dashboard</h1>
+	<div class="admin-header">
+		<h1 align="center">Dashboard</h1>
+	</div>
 	<div class="fields">
-		<form method="POST" action="{{ url_for('admin') }}" enctype=multipart/form-data>
+		<form method="POST" action="{{ url_for('admin') }}" enctype=multipart/form-data> 
 			<input type="text" name="title" placeholder="title"></input><br />
-			<input type="text" name="description" placeholder="description"></input><br />
+			<textarea rows="3" cols="120" type="text" name="description" placeholder="description"></textarea><br />
 			<input type="text" name="button_list_title" placeholder="button_list_title"></input><br />
 			<input type="text" name="button_list_url" placeholder="button_list_url"></input><br />
 			<input type="text" name="tags" placeholder="tags"></input><br />
 		<!-- ********************************************************************************* -->
 			<div class="files">
 			<p>upload Images</p>
-			<input type="file" name="file"></input>
-			<input type="submit" value="Upload">
-			<!--
-			<p>thumbnail_2</p>
-			<input type="file"></input>
-			<p>large_1</p>
-			<input type="file"></input>
-			<p>large_2</p>
-			<input type="file"></input>
-			-->
-			<br />
+			<input type="file" name="file"></input><br />
+			<input type="file" name="file2"></input><br /><br />
 			</div>
 			<button type="submit" value="submit">Submit</button><br />	
 		</form>

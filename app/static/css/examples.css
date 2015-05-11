@@ -10,8 +10,10 @@ form,fieldset,input,textarea,p,blockquote,th,td {
 /* NEW STYLE
  * -------------------------------------- */
 #section0  {
+	/*
 	background-image: url("/static/img/main.jpg");
 	background-size: cover;
+	*/
 }
 
 a{

@@ -34,15 +34,17 @@ class Projects(db.Model):
 	button_list_url = db.Column(db.String(30), index=True)
 	tags = db.Column(db.String(20), index=True)
 	file = db.Column(db.Unicode(1000))
+	file2 = db.Column(db.Unicode(1000))
 	
 	
-	def __init__ (self, title, description, button_list_title, button_list_url, tags, file):
+	def __init__ (self, title, description, button_list_title, button_list_url, tags, file, file2):
 		self.title = title
 		self.description = description
 		self.button_list_title = button_list_title
 		self.button_list_url = button_list_url
 		self.tags = tags 
 		self.file = file
+		self.file2 = file2
 		
 
 	

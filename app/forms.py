@@ -4,6 +4,11 @@ class LoginForm(form.Form):
 	username = fields.TextField('username', validators=[validators.DataRequired()])
 	password = fields.PasswordField('password', validators=[validators.DataRequired()])
 	
+
+class emailForm(form.Form):
+	sender = fields.TextField('sender')
+	body = fields.PasswordField('body')	
+
 	
 class adminForm(form.Form):
 	title = fields.TextField('title')

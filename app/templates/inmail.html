@@ -1,2 +1,9 @@
-<input type="text" placeholder="Subject"></input><br />
-<textarea row="" col="" placeholder="Hi...."></textarea>
+<body>
+<form method="POST" action="{{ url_for('inmail') }}">
+
+<input type="text" placeholder="From: ex. john@aulatech.co" name="sender"></input><br />
+<textarea row="" col="" placeholder="Hi...." name="body"></textarea><br />
+<button type="submit" value="sent"><p>Send</p></button>
+
+</form>
+</body>
